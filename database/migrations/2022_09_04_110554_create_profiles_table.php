@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->integer('user_id')->unique();
+            $table->integer('gender');
             $table->string('name');
             $table->string('nationalcode');
             $table->string('phone');

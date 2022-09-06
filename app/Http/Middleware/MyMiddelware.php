@@ -36,11 +36,11 @@ $pagename=Route::currentRouteName();
             return to_route('login');
         }else{
 
-            $userAccess=Auth::user()->userAccess;
+            $userAccess=Auth::user()->user_access;
 
         }
-        $roll=Middelware::where('user_access','like',$userAccess->id)->select('pagename')->get();
-        $stting=Setting::where('user_access','like',$userAccess->id)->select('title','value')->get();
+        $roll=Middelware::where('user_access','like',$userAccess)->select('pagename')->get();
+        $stting=Setting::where('user_access','like',$userAccess)->select('title','value')->get();
 
         HomeController::middware($roll,$stting);
                 if(array_search($pagename,HomeController::$middware) || isset(__('setting.publicpage')[$pagename])){
