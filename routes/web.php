@@ -3,6 +3,7 @@
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth Route
+// DB::listen(function ($event) {
+    //     dump($event->sql);
+    //     dump($event->bindings);
+    //     });
+
+    // Auth Route
 Auth::routes([
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...

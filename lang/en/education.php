@@ -34,29 +34,23 @@ return[
 
     'messages' => [
                 "meli_code.unique"=>"کد ملیس تکراری است",
-                "car_type.required"=>"فیلد کد ملی نباید خالی باشد.",
-                "termograf.required"=>"فیلد شماره هوشمند نباید خالی باشد.",
-                "meli_code.between"=>" کد ملی ده رقمی باشد  .",
-                "name.required" => "نام و نام خانوادگی نباید خالی باشد.",
-                "phone.required" => "شماره تلفن نباید خالی باشد.",
-                "password.confirmed" => "تکرار رمز صحیح نیست.",
-                "password.min" => "رمز باید بیشتر از 8 رقم باشد.",
-                "profile.max"=>"حجم عکس نباید بیشتر از  2 مگابایت باشد",
-                "profile.mimes"=>"این پسوند مجاز به آپلود نمی باشد",
+                "edu.required"=>"فیلد میزان تحصیلات نباید خالی باشد.",
+                "uni.required"=>"فیلد نوع مرکز آموزشی نباید خالی باشد.",
+                "avg.required"=>"فیلد معدل نباید خالی باشد.",
+                "start_date.between"=>"سال را به درستی انتخاب کنید",
+                "start_date.required" => "سال شروع نباید خالی باشد.",
+                "end_date.required" => "سال پایان نباید خالی باشد.",
+                "edu_description.required" => "توضیحات مربوط به محل تحصیل نباید خالی باشد.",
             ],
         'validate'=>[
-            'name' => 'required',
-            'car_type' => 'required||exists:car_types,id',
-            'termograf' => 'required|in:0,1',
-            'termonumber' => 'required',
-            'length' => 'required|integer',
-            'width' => 'required|integer',
-            'height' => 'required|integer',
-            'Plaque_ser' => 'required|digits:2',
-            'Plaque_char' => 'required|between:0,32',
-            'Plaque_number' => 'required|digits:3',
-            'Plaque_ir' => 'required|digits:2',
-            'ty' => 'required|integer',
+            'edu' => 'required',//exists:car_types,id
+            'uni' => 'required|',
+            'avg' => 'required',
+            'start_date' => 'required|integer|between:1350,1500',
+            'end_date' => 'required|integer',
+            'edu_description' => 'required|string',
+
+
         ]
 
 

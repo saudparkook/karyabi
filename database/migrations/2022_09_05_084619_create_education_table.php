@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {//سابقه تحصیلی
         Schema::create('education', function (Blueprint $table) {
+            $table->id();
             $table->integer('user_id');
             $table->integer('edu');
             $table->integer('uni');

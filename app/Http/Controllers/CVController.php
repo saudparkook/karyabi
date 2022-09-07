@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CVController extends Controller
 {
@@ -24,7 +26,9 @@ class CVController extends Controller
     public function create()
     {
         //
-        return view('CV.createCV');
+        $userInfo=Auth::user()->load(['getEducation']);
+        // return $userInfo;
+        return view('CV.createCV',compact('userInfo'));
     }
 
     /**
@@ -73,8 +77,31 @@ class CVController extends Controller
     }
 
     public function editCV(Request $request, $username){
-        return $request;
+
+
+
+        $validatedData = $request->validate(__('education.validate'),__('education.messages'));
+
+        if(isset($request['education'])){
+            // print_r( $this->education($request));
+            $ed=Education::where('user_id','=',Auth::user()->id)->firstOrNew();
+            $ed->user_id=Auth::user()->id;
+            $ed->edu=$request->edu;
+            $ed->uni=$request->uni;
+            $ed->avg=$request->avg;
+            $ed->description=$request->edu_description;
+            $ed->start_date=$request->start_date;
+            $ed->end_date=$request->end_date;
+            $ed->save();
+        }
+
         return redirect()->back()->with('success-dialog',__('education.success_dialog'));
+    }
+
+    public function education($request){
+        $ed=Education::where('user_id','=',Auth::user()->id)->first();
+
+        return $ed;
     }
 
 

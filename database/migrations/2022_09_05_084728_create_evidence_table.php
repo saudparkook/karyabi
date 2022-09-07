@@ -15,6 +15,7 @@ return new class extends Migration
     {
         //مدارک فنی و غیر فنی
         Schema::create('evidence', function (Blueprint $table) {
+            $table->id();
             $table->integer('user_id');
             $table->integer('category');
             $table->text('description');
