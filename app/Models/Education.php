@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Education extends Model
 {
     use HasFactory;
-    protected $guarded = ['user_id'];
 
     public $timestamps = false;
     protected $fillable = [

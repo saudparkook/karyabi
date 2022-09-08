@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Education;
+use App\Models\Evidence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CVController extends Controller
 {
@@ -26,6 +28,7 @@ class CVController extends Controller
     public function create()
     {
         //
+        Session::forget('request');
         $userInfo=Auth::user()->load(['getEducation']);
         // return $userInfo;
         return view('CV.createCV',compact('userInfo'));
@@ -76,32 +79,46 @@ class CVController extends Controller
         //
     }
 
-    public function editCV(Request $request, $username){
+    public function editCV(Request $request){
+        // return $request;
+        session([
+            'partofpage' => $request->partofpage,
+            'request' => $request
+        ]);
 
+        if($request['partofpage']=='education'){
+            session()->forget('request');
+            $this->education($request);
+        }elseif($request['partofpage']=='evidence'){
+            $this->evidence($request);
+            session()->forget('request');
 
-
-        $validatedData = $request->validate(__('education.validate'),__('education.messages'));
-
-        if(isset($request['education'])){
-            // print_r( $this->education($request));
-            $ed=Education::where('user_id','=',Auth::user()->id)->firstOrNew();
-            $ed->user_id=Auth::user()->id;
-            $ed->edu=$request->edu;
-            $ed->uni=$request->uni;
-            $ed->avg=$request->avg;
-            $ed->description=$request->edu_description;
-            $ed->start_date=$request->start_date;
-            $ed->end_date=$request->end_date;
-            $ed->save();
         }
 
-        return redirect()->back()->with('success-dialog',__('education.success_dialog'));
+        return redirect()->back()->with(['success-dialog'=>__('education.success_dialog'),'partofpage'=>$request->partofpage]);
     }
 
     public function education($request){
-        $ed=Education::where('user_id','=',Auth::user()->id)->first();
+        $validatedData = $request->validate(__('education.validate'),__('education.messages'));
+        $ed=Education::where('user_id','=',Auth::user()->id)->firstOrNew();
+        $ed->user_id=Auth::user()->id;
+        $ed->edu=$request->edu;
+        $ed->uni=$request->uni;
+        $ed->avg=$request->avg;
+        $ed->description=$request->edu_description;
+        $ed->start_date=$request->start_date;
+        $ed->end_date=$request->end_date;
+        $ed->save();
+    }
+    public function evidence($request){
+        $validatedData = $request->validate(__('evidence.validate'),__('evidence.messages'));
+        $ev=new Evidence([
+            'user_id'=>Auth::user()->id,
+            'category'=>$request->evi_cat,
+            'description'=>$request->evi_dec,
+        ]);
 
-        return $ed;
+        $ev->save();
     }
 
 

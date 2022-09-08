@@ -1,6 +1,6 @@
- <form id="education_form" action="{{ route('editCV', '1') }}" method="POST">
+ <form id="education_form" action="{{ route('editCV') }}" method="POST">
     @csrf
-    <input type="text" name="education" hidden>
+    <input type="text" name="partofpage" value="education" hidden>
     @method('put')
     <div class="row">
         <div class="col-sm-2 mt-3 mx-auto">

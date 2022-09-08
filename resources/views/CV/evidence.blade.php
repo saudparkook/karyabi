@@ -1,8 +1,10 @@
-<form id="evidence_form" action="{{ route('editCV', '1') }}" method="POST">
+<form id="evidence_form" action="{{ route('editCV') }}" method="POST">
     @csrf
+    <input type="text" name="partofpage" value="evidence" hidden>
     @method('put')
+
     <div class="row" id="evi_div">
-        <div class="col-sm-6 p-2 mx-auto" id="evi_div_0">
+        <div class="col-sm-6 p-2 mx-auto" id="evi_div_0" hidden>
             <div class="input-group">
                 <select name="evi_cat[]" id="evi_cat_0" class="form-control text-center">
                     <option value="">1</option>
@@ -13,6 +15,9 @@
                 <input class="form-control" type="text" placeholder="شرح مدرک گرفته شده" name="evi_dec[]" id="evi_dec_0">
             </div>
         </div>
+        @if (session("request"))
+            {{session("request")->evi_cat[0]}}
+        @endif
         <div class="col-sm-6 text-center p-2 mx-auto" id="evi_div_1">
             <img src="{{url('images/add.png')}}" width="55" onclick="add_port(1)" >
         </div>
@@ -22,7 +27,7 @@
     <div class="row">
         <div class="mx-auto text-center">
             <button class="btn btn-primary mt-3" type="button"
-            onclick="refhref('evidence_form','{{__('education.confrim')}}')"
+            onclick="refhref('evidence_form','{{__('evidence.confrim')}}')"
             >ذخیره سازی</button>
         </div>
     </div>

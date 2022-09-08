@@ -8,12 +8,22 @@
                 <button
                  id="pills-{{$key}}-tab" data-bs-toggle="pill"
                 data-bs-target="#pills-{{$key}}" type="button" role="tab" aria-controls="pills-{{$key}}"
-                @if ($item[1]==1)
-                aria-selected="true"
-                class="nav-link mx-auto active"
+                @if(session("partofpage"))
+                    @if (session("partofpage")==$key)
+                    aria-selected="true"
+                    class="nav-link mx-auto active"
+                    @else
+                    aria-selected="false"
+                    class="nav-link mx-auto "
+                    @endif
                 @else
-                aria-selected="false"
-                class="nav-link mx-auto "
+                    @if ($item[1]==1)
+                    aria-selected="true"
+                    class="nav-link mx-auto active"
+                    @else
+                    aria-selected="false"
+                    class="nav-link mx-auto "
+                    @endif
                 @endif
                 >{{$item[0]}}</button>
               </li>
@@ -26,11 +36,18 @@
 
                 @foreach (__('text.CVitems') as $key=>$item)
                 <div
-                @if ($item[1]==1)
-                class="tab-pane fade show active"
+                @if(session("partofpage"))
+                    @if (session("partofpage")==$key)
+                    class="tab-pane fade show active"
+                    @else
+                    class="tab-pane fade"
+                    @endif
                 @else
-                class="tab-pane fade"
-
+                    @if ($item[1]==1)
+                    class="tab-pane fade show active"
+                    @else
+                    class="tab-pane fade"
+                    @endif
                 @endif
                  id="pills-{{$key}}" role="tabpanel"
                 aria-labelledby="pills-{{$key}}-tab">

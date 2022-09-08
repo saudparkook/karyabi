@@ -29,9 +29,9 @@ Auth::routes([
   ]);
 
 
-  Route::get('/createCV', [CVController::class, 'create'])->name('createCV');
-  Route::put('/editCV/{username}', [CVController::class, 'editCV'])->name('editCV');
   Route::middleware(['myroute'])->group(function () {
+      Route::get('/createCV', [CVController::class, 'create'])->name('createCV');
+      Route::put('/editCV', [CVController::class, 'editCV'])->name('editCV');
       Route::get('/home', [HomeController::class, 'index'])->name('home');
       Route::get('/', function () {
           return view('welcome');
