@@ -1,17 +1,24 @@
 <?php
+
+use App\Rules\ArrayEviIn;
+
 return[
 
 
+    'confrimdelete'=>'ایا  این بخش را حذف مینمایید؟',
     'confrim'=>'ایا اطلاعات مدرک را بروز مینمایید؟',
-    'success_dialog'=>'مدارک با موفقیت بروز گشت',
+    'success_dialog'=>'مدارک و فعالیت ها با موفقیت بروز گشت',
+    'error_dialog'=>'توضیحاتی برای هیج دسته ای اعمال نکرده اید',
+
+    'placeholder_dec'=>'شرح مدرک یا فعالیت ',
 
     'messages' => [
-        "description.required"=>"شرح مدرک را خالی نگذارید",
-        "category.required"=>"فیلد دسته مدرک راانتخاب کنید.",
+        "evi_cat.required"=>"فیلد دسته مدرک راانتخاب کنید.",
+        "evi_dec.required"=>"شرح مدرک یا فعالیت را خالی نگذارید",
 
     ],
 'validate'=>[
-    'description' => 'required',//exists:car_types,id
-    'category' => 'required',
+    'evi_cat' => 'required',
+    'evi_dec' => ['required',new ArrayEviIn()],//exists:car_types,id
 ]
 ];

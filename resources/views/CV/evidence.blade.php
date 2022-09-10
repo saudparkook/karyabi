@@ -1,4 +1,30 @@
-<form id="evidence_form" action="{{ route('editCV') }}" method="POST">
+<div class="row mx-auto m-2 bg-light p-1">
+    @if (count($userInfo->getEvidence)>0)
+        @foreach ($userInfo->getEvidence as $item)
+            <h4>
+                {{$item->category}}
+            </h4>
+            <div class="col-sm-11 mx-auto">
+                <div class="input-group">
+                    <h6 class="p-2">
+                        {{$item->description}}
+                    </h6>
+                    <form id="evi_item-{{$item->id}}" action="{{ route('deleteCV',$item->id) }}"
+                        method="POST">
+                        @csrf
+                        @method('delete')
+                        <input type="text" name="partofpage" value="evidence" hidden>
+                    </form>
+                    <button class="text-danger" style="background-color: #00000000;border: 0px;"
+                    onclick="refhref('evi_item-{{$item->id}}','{{__('evidence.confrimdelete')}}')">حذف</button>
+                </div>
+                <hr class=" mx-auto">
+            </div>
+        @endforeach
+    @endif
+</div>
+<div class="row">
+    <form id="evidence_form" action="{{ route('editCV') }}" method="POST">
     @csrf
     <input type="text" name="partofpage" value="evidence" hidden>
     @method('put')
@@ -6,17 +32,17 @@
     <div class="row" id="evi_div">
         <div class="col-sm-6 p-2 mx-auto" id="evi_div_0" hidden>
             <div class="input-group">
-                <select name="evi_cat[]" id="evi_cat_0" class="form-control text-center">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
+                <select id="evi_cat_0" class="form-control text-center">
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                    <option value="2">3</option>
+                    <option value="3">4</option>
                 </select>
-                <input class="form-control" type="text" placeholder="شرح مدرک گرفته شده" name="evi_dec[]" id="evi_dec_0">
+                <input class="form-control" type="text" placeholder="{{__('evidence.placeholder_dec')}}" id="evi_dec_0">
             </div>
         </div>
         @if (session("request"))
-            {{session("request")->evi_cat[0]}}
+        {{-- {{session("request")->evi_cat[0]}} --}}
         @endif
         <div class="col-sm-6 text-center p-2 mx-auto" id="evi_div_1">
             <img src="{{url('images/add.png')}}" width="55" onclick="add_port(1)" >
@@ -40,8 +66,10 @@
 
         let selectitem=evi_cat_0.cloneNode(true);
         selectitem.setAttribute("id", "evi_cat_"+(num+1));
+        selectitem.setAttribute("name", "evi_cat[]");
         let inputitem=evi_dec_0.cloneNode(true);
         inputitem.setAttribute("id", "evi_dec_"+(num+1));
+        inputitem.setAttribute("name", "evi_dec[]");
         inputitem.value="";
         //delete button
         let btn=document.createElement('button');
@@ -69,9 +97,11 @@
         new_add_div.innerHTML="";
         new_add_div.appendChild(im);
         evi_div.appendChild(new_add_div);
-        }
+    }
         function delete_fun(num){
             let element=document.getElementById('evi_div_'+num).remove();
 
         }
-</script>
+    </script>
+
+</div>

@@ -31,6 +31,7 @@ Auth::routes([
 
   Route::middleware(['myroute'])->group(function () {
       Route::get('/createCV', [CVController::class, 'create'])->name('createCV');
+      Route::delete('/deleteCV/{id}', [CVController::class, 'destroy'])->name('deleteCV');
       Route::put('/editCV', [CVController::class, 'editCV'])->name('editCV');
       Route::get('/home', [HomeController::class, 'index'])->name('home');
       Route::get('/', function () {

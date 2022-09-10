@@ -61,7 +61,7 @@ return[
 
     "CVitems"=>[
         'education'=>['تحصیلات',1],
-        'evidence'=>['مدارک',0],
+        'evidence'=>['مدارکو فعالیت ها',0],
         'skill'=>['مهارت ها',0],
         'experiences'=>['سوابق شغلی',0],
         'project'=>['پروژه ها',0],
