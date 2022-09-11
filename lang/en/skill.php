@@ -13,7 +13,7 @@ return[
     'placeholder_dec'=>'شرح مهارت یا فعالیت ',
 
     'messages' => [
-        "skill_cat.required"=>"فیلد دسته مهارت راانتخاب کنید.",
+        "skill_cat.required"=>"فیلد دسته مهارت را انتخاب کنید.",
         "skill_dec.required"=>"شرح مهارت را خالی نگذارید",
         "skill_Score.required"=>"بخود امتیاز دهید",
         "skill_Score.between"=>"بخود امتیاز دهید",

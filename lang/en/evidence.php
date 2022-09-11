@@ -13,7 +13,7 @@ return[
     'placeholder_dec'=>'شرح مدرک یا فعالیت ',
 
     'messages' => [
-        "evi_cat.required"=>"فیلد دسته مدرک راانتخاب کنید.",
+        "evi_cat.required"=>"فیلد دسته مدرک را انتخاب کنید.",
         "evi_dec.required"=>"شرح مدرک یا فعالیت را خالی نگذارید",
 
     ],
