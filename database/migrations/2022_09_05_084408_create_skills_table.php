@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {//مهارت ها
         Schema::create('skills', function (Blueprint $table) {
-           $table->integer('user_id');
-           $table->integer('catgory');
-           $table->text('description');
-           $table->integer('Score');
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('catgory');
+            $table->text('description');
+            $table->integer('Score');
         });
     }
 

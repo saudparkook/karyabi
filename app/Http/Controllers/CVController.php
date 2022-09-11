@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\Evidence;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +30,8 @@ class CVController extends Controller
     {
         //
 
-        $userInfo=Auth::user()->load(['getEducation','getEvidence']);
-        // return $userInfo;
+        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill']);
+        // return $userInfo->getSkill;
         return view('CV.createCV',compact('userInfo'));
     }
 
@@ -93,6 +94,10 @@ class CVController extends Controller
             // return session('request');
             $message=$this->evidence($request);
             session()->forget('request');
+        }elseif($request['partofpage']=='skill'){
+            $message=$this->skill($request);
+            session()->forget('request');
+        }elseif($request['partofpage']==''){
 
         }
         Session::forget(['request','partofpage']);
@@ -127,11 +132,7 @@ class CVController extends Controller
                     'description'=>$request->evi_dec[$i]]);
             }
         }
-        //  Evidence([
-        //     'user_id'=>Auth::user()->id,
-        //     'category'=>$request->evi_cat,
-        //     'description'=>$request->evi_dec,
-        // ]);
+
         if($bool){
             Evidence::insert($data);
             return ['success-dialog',__('evidence.success_dialog')];
@@ -140,7 +141,30 @@ class CVController extends Controller
 
 
     }
+    public function skill($request){
 
+        $validatedData = $request->validate(__('skill.validate'),__('skill.messages'));
+        $id=Auth::user()->id;
+        $bool=false;
+        $data=array();
+        for($i=0;$i<count($request->skill_cat);$i++){
+            if($request->skill_cat[$i]!=''&&
+            $request->skill_dec[$i]!=''&&
+            $request->skill_Score[$i]>5){
+                $bool=true;
+                array_push($data,['user_id'=>$id,
+                    'catgory'=>$request->skill_cat[$i],
+                    'Score'=>$request->skill_Score[$i],
+                    'description'=>$request->skill_dec[$i]]);
+            }
+        }
+        if($bool){
+            Skill::where('user_id','=',$id)->delete();
+            Skill::insert($data);
+            return ['success-dialog',__('evidence.success_dialog')];
+        }
+        return ['error-dialog',__('skill.error_dialog')];
+    }
 
     /**
      * Remove the specified resource from storage.
