@@ -58,10 +58,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Skill::class,'user_id','id');
     }
-    // public function getEducation()
-    // {
-    //     return $this->hasMany(Education::class,'user_id','id');
-    // }
+    public function getlanguage()
+    {
+        return $this->hasMany(Language::class,'user_id','id');
+    }
     // public function getEducation()
     // {
     //     return $this->hasMany(Education::class,'user_id','id');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\Evidence;
+use App\Models\Language;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class CVController extends Controller
     {
         //
 
-        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill']);
+        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill','getlanguage']);
         // return $userInfo->getSkill;
         return view('CV.createCV',compact('userInfo'));
     }
@@ -97,6 +98,9 @@ class CVController extends Controller
         }elseif($request['partofpage']=='skill'){
             $message=$this->skill($request);
             session()->forget('request');
+        }elseif($request['partofpage']=='language'){
+            $message=$this->language($request);
+            session()->forget('request');
         }elseif($request['partofpage']==''){
 
         }
@@ -161,9 +165,32 @@ class CVController extends Controller
         if($bool){
             Skill::where('user_id','=',$id)->delete();
             Skill::insert($data);
-            return ['success-dialog',__('evidence.success_dialog')];
+            return ['success-dialog',__('skill.success_dialog')];
         }
         return ['error-dialog',__('skill.error_dialog')];
+    }
+    public function language($request){
+
+        $validatedData = $request->validate(__('language.validate'),__('language.messages'));
+        $id=Auth::user()->id;
+        $bool=false;
+        $data=array();
+        for($i=0;$i<count($request->language_title);$i++){
+            if($request->language_title[$i]!=''&&
+            $request->language_Score[$i]>5){
+                $bool=true;
+                array_push($data,['user_id'=>$id,
+                    'title'=>$request->language_title[$i],
+                    'Score'=>$request->language_Score[$i]
+                ]);
+            }
+        }
+        if($bool){
+            Language::where('user_id','=',$id)->delete();
+            Language::insert($data);
+            return ['success-dialog',__('language.success_dialog')];
+        }
+        return ['error-dialog',__('language.error_dialog')];
     }
 
     /**
