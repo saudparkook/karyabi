@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\Evidence;
+use App\Models\Experience;
 use App\Models\Language;
+use App\Models\Media;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +33,7 @@ class CVController extends Controller
     {
         //
 
-        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill','getlanguage']);
+        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill','getlanguage','getExperience']);
         // return $userInfo->getSkill;
         return view('CV.createCV',compact('userInfo'));
     }
@@ -100,6 +102,13 @@ class CVController extends Controller
             session()->forget('request');
         }elseif($request['partofpage']=='language'){
             $message=$this->language($request);
+            session()->forget('request');
+        }elseif($request['partofpage']=='media'){
+            // return $request;
+            $message=$this->media($request);
+            session()->forget('request');
+        }elseif($request['partofpage']=='experience'){
+            $message=$this->experience($request);
             session()->forget('request');
         }elseif($request['partofpage']==''){
 
@@ -193,6 +202,58 @@ class CVController extends Controller
         return ['error-dialog',__('language.error_dialog')];
     }
 
+    public function media($request){
+
+        $validatedData = $request->validate(__('media.validate'),__('media.messages'));
+        $id=Auth::user()->id;
+        $bool=false;
+        $data=array();
+        for($i=0;$i<count($request->media_company);$i++){
+            if($request->media_company[$i]!=''&&
+            $request->media_value[$i]!=''){
+                $bool=true;
+                array_push($data,['user_id'=>$id,
+                    'company'=>$request->media_company[$i],
+                    'value'=>$request->media_value[$i]
+                ]);
+            }
+        }
+        if($bool){
+            Media::where('user_id','=',$id)->delete();
+            Media::insert($data);
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        return ['error-dialog',__('media.error_dialog')];
+    }
+    public function experience($request){
+
+        $validatedData = $request->validate(__('experience.validate'),__('experience.messages'));
+        $id=Auth::user()->id;
+        $bool=false;
+        $data=array();
+        for($i=0;$i<count($request->exp_title);$i++){
+            if($request->exp_title[$i]!=''&&
+            $request->exp_company[$i]!=''&&
+            $request->exp_start_date[$i]!=''&&
+            $request->exp_end_date[$i]!=''&&
+            $request->exp_dec[$i]!=''){
+                $bool=true;
+                array_push($data,['user_id'=>$id,
+                    'title'=>$request->exp_title[$i],
+                    'company'=>$request->exp_company[$i],
+                    'end_date'=>$request->exp_start_date[$i],
+                    'start_date'=>$request->exp_end_date[$i],
+                    'description'=>$request->exp_dec[$i],
+                ]);
+            }
+        }
+        if($bool){
+            Experience::where('user_id','=',$id)->delete();
+            Experience::insert($data);
+            return ['success-dialog',__('experience.success_dialog')];
+        }
+        return ['error-dialog',__('experience.error_dialog')];
+    }
     /**
      * Remove the specified resource from storage.
      *

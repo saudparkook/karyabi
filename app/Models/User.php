@@ -62,9 +62,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Language::class,'user_id','id');
     }
-    // public function getEducation()
-    // {
-    //     return $this->hasMany(Education::class,'user_id','id');
-    // }
+    public function getMedia()
+    {
+        return $this->hasMany(Media::class,'user_id','id');
+    }
+    public function getExperience()
+    {
+        return $this->hasMany(Experience::class,'user_id','id');
+    }
 
 }

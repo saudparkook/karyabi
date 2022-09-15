@@ -55,12 +55,12 @@
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input class="m-1" type="range" min="0" max="100" name="language_Score[]"
+                        <input class="m-1 w-12" style="width: 100%;" type="range" min="0" max="100" name="language_Score[]"
                         id="language_Score_{{$item->id}}" value="{{$item->Score}}">
                     </div>
-                     <div class="col-sm-2">
+                     <div class="col-sm-2 text-center">
                         <button class="btn btn-danger my-auto align-middle"
-                     type="button" onclick="delete_fun('{{$item->id}}')">حذف</button>
+                     type="button" onclick="delete_fun_language('{{$item->id}}')">حذف</button>
                      </div>
 
                 </div>
@@ -69,7 +69,7 @@
 
 
         <div class="col-sm-6 text-center p-2 mx-auto" id="language_div_{{$num}}">
-            <img src="{{url('images/add.png')}}" width="55" onclick="add_port('{{$num}}')" >
+            <img src="{{url('images/add.png')}}" width="55" onclick="add_port_language('{{$num}}')" >
         </div>
 
 
@@ -84,7 +84,7 @@
 </form>
 <script>
 
-    function add_port(num){
+    function add_port_language(num){
         let add_div=document.getElementById('language_div_'+(num));
         let new_add_div=add_div.cloneNode(true);
 
@@ -105,7 +105,7 @@
         let btn=document.createElement('button');
         btn.setAttribute("class", "btn btn-danger my-auto align-middle");
         btn.setAttribute("type", "button");
-        btn.setAttribute('onclick','delete_fun('+num+')');
+        btn.setAttribute('onclick','delete_fun_language('+num+')');
         btn.innerHTML="حذف";
         let col_btn=document.createElement('div');
         col_btn.setAttribute("class", "col-sm-2");
@@ -125,13 +125,13 @@
         let im=document.createElement('img');
         im.setAttribute("width", "55");
         im.setAttribute("src", IMG);
-        im.setAttribute("onclick", "add_port("+(num+1)+")");
+        im.setAttribute("onclick", "add_port_language("+(num+1)+")");
 
         new_add_div.innerHTML="";
         new_add_div.appendChild(im);
         language_div.appendChild(new_add_div);
     }
-        function delete_fun(num){
+        function delete_fun_language(num){
             let element=document.getElementById('language_div_'+num).remove();
 
         }
