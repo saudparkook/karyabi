@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        'user_id',
+        'title',
+        'position',
+        'description',
+        'date',
+
+    ];
 }

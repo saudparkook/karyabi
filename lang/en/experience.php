@@ -19,7 +19,7 @@ return[
         '0'=>'مشغول به کار'
     ],
     'messages' => [
-        "experience_company.required"=>"فیلد عنوان سوابق شغلی را انتخاب کنید.",
+        "experience_title.required"=>"فیلد عنوان سوابق شغلی را انتخاب کنید.",
         "exp_dec.required"=>"توضیحات  شغلی خود را وارد کنید",
         "exp_dec.*.required"=>"توضیحات  شغلی خود را وارد کنید",
         "exp_company.required"=>"  نام شرکت را وارد کنید",

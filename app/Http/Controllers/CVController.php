@@ -7,6 +7,7 @@ use App\Models\Evidence;
 use App\Models\Experience;
 use App\Models\Language;
 use App\Models\Media;
+use App\Models\Project;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class CVController extends Controller
     {
         //
 
-        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill','getlanguage','getExperience']);
+        $userInfo=Auth::user()->load(['getEducation','getEvidence','getSkill','getlanguage','getExperience','getProject']);
         // return $userInfo->getSkill;
         return view('CV.createCV',compact('userInfo'));
     }
@@ -109,6 +110,9 @@ class CVController extends Controller
             session()->forget('request');
         }elseif($request['partofpage']=='experience'){
             $message=$this->experience($request);
+            session()->forget('request');
+        }elseif($request['partofpage']=='project'){
+            $message=$this->project($request);
             session()->forget('request');
         }elseif($request['partofpage']==''){
 
@@ -253,6 +257,33 @@ class CVController extends Controller
             return ['success-dialog',__('experience.success_dialog')];
         }
         return ['error-dialog',__('experience.error_dialog')];
+    }
+    public function project($request){
+
+        $validatedData = $request->validate(__('project.validate'),__('project.messages'));
+        $id=Auth::user()->id;
+        $bool=false;
+        $data=array();
+        for($i=0;$i<count($request->project_title);$i++){
+            if($request->project_title[$i]!=''&&
+            $request->project_position[$i]!=''&&
+            $request->project_date[$i]!=''&&
+            $request->project_dec[$i]!=''){
+                $bool=true;
+                array_push($data,['user_id'=>$id,
+                    'title'=>$request->project_title[$i],
+                    'position'=>$request->project_position[$i],
+                    'date'=>$request->project_date[$i],
+                    'description'=>$request->project_dec[$i],
+                ]);
+            }
+        }
+        if($bool){
+            Project::where('user_id','=',$id)->delete();
+            Project::insert($data);
+            return ['success-dialog',__('project.success_dialog')];
+        }
+        return ['error-dialog',__('project.error_dialog')];
     }
     /**
      * Remove the specified resource from storage.

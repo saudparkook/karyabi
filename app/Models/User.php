@@ -70,5 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Experience::class,'user_id','id');
     }
+    public function getProject()
+    {
+        return $this->hasMany(Project::class,'user_id','id');
+    }
 
 }

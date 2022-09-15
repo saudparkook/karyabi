@@ -7,7 +7,7 @@ return[
     'iconbar'=>'images/tha2.png',
     'color'=>['0'=>'#fbe3a1','1'=>'#83FFE6'],
     'confirmButtonText'=>'تایید',
-    'exitButtonText'=>'حذف',
+    'exitButtonText'=>'خروج',
     'hedearMenu'=>[
         0=>[
             ['href'=>'',
@@ -64,8 +64,8 @@ return[
         'education'=>['تحصیلات',0],
         'evidence'=>['مدارک و فعالیت ها',0],
         'skill'=>['مهارت ها',0],
-        'experience'=>['سوابق شغلی',1],
-        'project'=>['پروژه ها',0],
+        'experience'=>['سوابق شغلی',0],
+        'project'=>['پروژه ها',1],
         'language'=>['زبان خارجه',0],
         'media'=>['رسانه های اجتماعی',0],
     ],

@@ -98,7 +98,7 @@
                     @endforeach
                     @for($i=1357;$i<1500;$i++)
                     <option
-                        @if ($item->start_date==$i)
+                        @if ($item->end_date==$i)
                             selected
                         @endif
                     value="{{$i}}">{{$i}}</option>
