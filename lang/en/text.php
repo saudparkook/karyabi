@@ -73,3 +73,5 @@ return[
 
 
 ];
+// ALTER TABLE `languages` DROP `id`;
+// ALTER TABLE `languages` ADD `id` int not null auto_increment primary key first;

@@ -12,10 +12,10 @@
             <div class="input-group">
                 <div class="col-sm-5">
                     <select id="language_title_0" class="form-control text-center">
-                        <option value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option>
+                        @foreach (__('language.list') as $KEY=>$LAN)
+                        <option value="{{$KEY}}">{{$LAN}}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <div class="col-sm-5">
@@ -32,26 +32,14 @@
                 <div class="row">
                     <div class="col-sm-5">
                         <select id="language_title_{{$item->id}}" name="language_title[]" class="form-control text-center">
-                            <option value="0"
-                            @if ($item->title==0)
+                            @foreach (__('language.list') as $KEY=>$LAN)
+                            <option value="{{$KEY}}"
+                            @if ($item->title==$KEY)
                             selected
                             @endif
-                            >1</option>
-                            <option value="1"
-                            @if ($item->title==1)
-                            selected
-                            @endif
-                            >2</option>
-                            <option value="2"
-                            @if ($item->title==2)
-                            selected
-                            @endif
-                            >3</option>
-                            <option value="3"
-                            @if ($item->title==3)
-                            selected
-                            @endif
-                            >4</option>
+                            >{{$LAN}}</option>
+                            @endforeach
+
                         </select>
                     </div>
                     <div class="col-sm-5">
