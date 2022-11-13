@@ -13,12 +13,13 @@ return[
     'placeholder_dec'=>'شرح مدرک یا فعالیت ',
 
     'messages' => [
-        "evi_cat.required"=>"فیلد دسته مدرک را انتخاب کنید.",
-        "evi_dec.required"=>"شرح مدرک یا فعالیت را خالی نگذارید",
+        "evidence_cat`.required"=>"فیلد دسته مدرک را انتخاب کنید.",
+        "evidence_dec.required"=>"شرح مدرک یا فعالیت را خالی نگذارید",
 
     ],
 'validate'=>[
-    'evi_cat' => 'required',
-    'evi_dec' => ['required',new ArrayEviIn()],//exists:car_types,id
+    'evidence_cat' => 'required',
+    'evidence_dec' => ['required'],
+    // 'evidence_dec.*' => ['required',new ArrayEviIn()],//exists:car_types,id
 ]
 ];

@@ -7,7 +7,7 @@
     <input type="text" name="partofpage" value="project" hidden>
     @method('put')
 
-    <div class="row" id="project_div">
+    <div class="col-lg" id="project_div">
         <div class="row p-2 mx-auto" id="project_div_0" hidden>
             <div class="col-sm-3 mt-3 mx-auto">
                 <small class="form-text text-muted">
@@ -89,7 +89,7 @@
 
 
         <div class="row text-center p-2 mx-auto" id="project_div_1">
-            <div>
+            <div class=" text-center mx-auto">
                 <img src="{{url('images/add.png')}}" width="55" onclick="add_port_project(1)" >
             </div>
         </div>

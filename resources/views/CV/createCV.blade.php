@@ -1,62 +1,80 @@
 @extends('headerAndFooter')
 @section('body')
-    <div class="container">
         {{-- منو انتخاب های پروفایل و تکمیل رزومه --}}
-        <ul class="nav nav-pills pt-4 mb-3 mx-auto text-center" id="pills-tab" role="tablist">
+        <ul class="nav pt-4 mb-3 mx-auto text-center" id="pills-tab" >
             @foreach (__('text.CVitems') as $key=>$item)
-            <li class="nav-item mx-auto " role="presentation">
-                <button
-                 id="pills-{{$key}}-tab" data-bs-toggle="pill"
-                data-bs-target="#pills-{{$key}}" type="button" role="tab" aria-controls="pills-{{$key}}"
+            <div class="nav-item mx-auto" id="pillsDiv{{$key}}" >
+                <button onclick="changeCVpage('pills-{{$key}}','{{$key}}')"
+                 type="button" id="btnSelect{{$key}}"
                 @if(session("partofpage"))
-                    @if (session("partofpage")==$key)
-                    aria-selected="true"
-                    class="nav-link mx-auto active"
+                    @if (session("partofpage")!=$key)
+                    class="btn btn-primary"
                     @else
-                    aria-selected="false"
-                    class="nav-link mx-auto "
+                    class="btn btn-success"
                     @endif
                 @else
-                    @if ($item[1]==1)
-                    aria-selected="true"
-                    class="nav-link mx-auto active"
+                    @if ($item[1]!=1)
+                    class="btn btn-primary"
                     @else
-                    aria-selected="false"
-                    class="nav-link mx-auto "
+                    class="btn btn-success"
                     @endif
                 @endif
                 >{{$item[0]}}</button>
-              </li>
+            </div>
             @endforeach
         </ul>
         {{-- پایان بخش منو انتخاب ها --}}
         {{-- بخش مربوط به ویرایش پروفایل  ورزومه --}}
-        <div class="row">
-            <div class="tab-content" id="pills-tabContent">
+        <div class="row text-center mx-auto" id="tabContent">
 
                 @foreach (__('text.CVitems') as $key=>$item)
-                <div
+                <div class="row text-center mx-auto"
                 @if(session("partofpage"))
-                    @if (session("partofpage")==$key)
-                    class="tab-pane fade show active"
-                    @else
-                    class="tab-pane fade"
+                    @if (session("partofpage")!=$key)
+                    hidden
                     @endif
                 @else
-                    @if ($item[1]==1)
-                    class="tab-pane fade show active"
-                    @else
-                    class="tab-pane fade"
+                    @if ($item[1]!=1)
+                    hidden
                     @endif
                 @endif
-                 id="pills-{{$key}}" role="tabpanel"
-                aria-labelledby="pills-{{$key}}-tab">
+                    id="pills-{{$key}}">
                   @include('CV.'.$key)
                </div>
                 @endforeach
 
-
-            </div>
         </div>
-    </div>
+    <script>
+        function changeCVpage(divid,btnid){
+            // alert(divid);
+            Did=document.getElementById("tabContent").childNodes;
+            let text = "";
+            for (let i = 0; i < Did.length; i++) {
+                if(Did[i].id===divid){
+                    Did[i].hidden=false;
+                }else{
+                    Did[i].hidden=true;
+                }
+
+            }
+            // btn
+            Bid=document.getElementById("pills-tab").children;
+            console.log((Bid.length));
+
+            for (let i = 0; i < Bid.length; i++) {
+                // if(Bid[i].childNodes[1].id===btnid){
+                //     Bid[i].childNodes[1].hidden=false;
+                // }else{
+                //     Bid[i].childNodes[1].hidden=true;
+                // }
+                $item=(Bid[i].id).replace('pillsDiv','');
+                if($item===btnid){
+                    document.getElementById('btnSelect'+btnid).className='btn btn-success';
+                }else{
+                    document.getElementById('btnSelect'+$item).className='btn btn-primary';
+                }
+
+            }
+        }
+    </script>
 @endsection

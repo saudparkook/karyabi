@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function getEducation()
     {
-        return $this->hasMany(Education::class,'user_id','id');
+        return $this->hasOne(Education::class,'user_id','id');
     }
     public function getEvidence()
     {

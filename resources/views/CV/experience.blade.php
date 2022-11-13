@@ -7,7 +7,7 @@
     <input type="text" name="partofpage" value="experience" hidden>
     @method('put')
 
-    <div class="row" id="exp_div">
+    <div class="col-lg" id="exp_div">
         <div class="row p-2 mx-auto" id="exp_div_0" hidden>
             <div class="col-sm-2 mt-3 mx-auto">
                 <small class="form-text text-muted">
@@ -47,14 +47,11 @@
                     @endfor
                 </select>
             </div>
-            <div class="input-group  mt-3">
                 <input class="form-control mb-1" type="text" placeholder="{{__('experience.span_dec')}}" name="exp_dec[]">
-
-            </div>
-            <div class="mt-3 text-center mx-auto">
+            <div class="col-lg mt-3 text-center mx-auto">
                 <button class="btn btn-danger mx-auto" >حذف</button>
             </div>
-        </div>
+            </div>
 
 
         {{-- get old item --}}
@@ -105,22 +102,20 @@
                     @endfor
                 </select>
             </div>
-            <div class="input-group  mt-3">
                 <input class="form-control mb-1" type="text" placeholder="{{__('experience.span_dec')}}" value="{{$item->description}}" name="exp_dec[]">
-
-            </div>
-            <div class="mt-3 text-center mx-auto">
+            <div class="col-lg mt-3 text-center mx-auto">
                 <button class="btn btn-danger mx-auto" onclick="delete_fun_experience('{{$item->id}}')" >حذف</button>
             </div>
         </div>
+        <hr>
         @endforeach
 {{--end get old item --}}
 
 
 
         <div class="row text-center p-2 mx-auto" id="exp_div_1">
-            <div>
-                <img src="{{url('images/add.png')}}" width="55" onclick="add_port_experience(1)" >
+            <div class=" text-center mx-auto">
+                <img src="{{url('images/add.png')}}" width="70" onclick="add_port_experience()" >
             </div>
         </div>
 
@@ -136,17 +131,19 @@
 </form>
 <script>
 
-    function add_port_experience(num){
+    function add_port_experience(){
 
         let expDIV=document.getElementById('exp_div_0');
         let expDIV2=expDIV.cloneNode(true);
         let divID=Math.floor(Math.random() * 10000);
         expDIV2.setAttribute('id',divID);
         expDIV2.hidden=false;
+        let hritem=document.createElement('hr');
+
         exp_div.insertBefore(expDIV2,exp_div_1);
+        exp_div.insertBefore(hritem,exp_div_1);
         let children=expDIV2.childNodes[11].childNodes[1];
         children.setAttribute('onclick','delete_fun_experience('+divID+')');
-        console.log(children);
 
     }
         function delete_fun_experience(num){

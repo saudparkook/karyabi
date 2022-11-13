@@ -85,7 +85,6 @@ class CVController extends Controller
     }
 
     public function editCV(Request $request){
-        // return $request;
         session([
             'partofpage' => $request->partofpage,
             'request' => $request->all()
@@ -95,9 +94,10 @@ class CVController extends Controller
             session()->forget('request');
             $message=$this->education($request);
         }elseif($request['partofpage']=='evidence'){
-            // return session('request');
+            // return $request->partofpage;
             $message=$this->evidence($request);
             session()->forget('request');
+
         }elseif($request['partofpage']=='skill'){
             $message=$this->skill($request);
             session()->forget('request');
@@ -137,20 +137,22 @@ class CVController extends Controller
     }
     public function evidence($request){
         $validatedData = $request->validate(__('evidence.validate'),__('evidence.messages'));
+        // return 'd';
         $id=Auth::user()->id;
         $bool=false;
         $data=array();
-        for($i=0;$i<count($request->evi_cat);$i++){
-            if($request->evi_cat[$i]!=''&&
-            $request->evi_dec[$i]!=''){
+        for($i=0;$i<count($request->evidence_cat);$i++){
+            if($request->evidence_cat[$i]!=''&&
+            $request->evidence_dec[$i]!=''){
                 $bool=true;
                 array_push($data,['user_id'=>$id,
-                    'category'=>$request->evi_cat[$i],
-                    'description'=>$request->evi_dec[$i]]);
+                    'category'=>$request->evidence_cat[$i],
+                    'description'=>$request->evidence_dec[$i]]);
             }
         }
 
         if($bool){
+            Evidence::where('user_id','=',$id)->delete();
             Evidence::insert($data);
             return ['success-dialog',__('evidence.success_dialog')];
         }
