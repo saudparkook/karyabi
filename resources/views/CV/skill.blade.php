@@ -20,8 +20,8 @@
                         <input class="form-control" type="text" placeholder="{{__('skill.placeholder_dec')}}" name="skill_dec[]">
 
                     </div>
-                    <div class="col-sm-3">
-                        <input class="m-1" type="range" min="0" max="100" style="width: 100%;" name="skill_Score[]">
+                    <div class="col-sm-3 my-auto">
+                        <input class="m-1 my-auto" type="range" min="0" max="100" style="width: 100%;" name="skill_Score[]">
                     </div>
 
                     <div class="col-sm-1 text-center">
@@ -65,8 +65,8 @@
                             <input class="form-control" type="text" name="skill_dec[]" value="{{$item->description}}"
                         placeholder="{{__('skill.placeholder_dec')}}" id="skill_dec_{{$item->id}}">
                         </div>
-                        <div class="col-sm-3">
-                            <input  type="range" min="0" max="100" name="skill_Score[]"
+                        <div class="col-sm-3 my-auto">
+                            <input class=" my-auto" type="range" min="0" max="100" name="skill_Score[]"
                          id="skill_Score_{{$item->id}}" style="width: 100%;" value="{{$item->Score}}">
                         </div>
                         <div class="col-sm-1 text-center">

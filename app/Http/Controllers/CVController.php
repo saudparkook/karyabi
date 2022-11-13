@@ -106,6 +106,7 @@ class CVController extends Controller
             session()->forget('request');
         }elseif($request['partofpage']=='media'){
             // return $request;
+
             $message=$this->media($request);
             session()->forget('request');
         }elseif($request['partofpage']=='experience'){
@@ -136,9 +137,12 @@ class CVController extends Controller
         return ['success-dialog',__('education.success_dialog')];
     }
     public function evidence($request){
-        $validatedData = $request->validate(__('evidence.validate'),__('evidence.messages'));
-        // return 'd';
         $id=Auth::user()->id;
+        if(count($request->evidence_cat)<2){
+            Evidence::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('evidence.validate'),__('evidence.messages'));
         $bool=false;
         $data=array();
         for($i=0;$i<count($request->evidence_cat);$i++){
@@ -162,8 +166,12 @@ class CVController extends Controller
     }
     public function skill($request){
 
-        $validatedData = $request->validate(__('skill.validate'),__('skill.messages'));
         $id=Auth::user()->id;
+        if(count($request->skill_cat)<2){
+            Skill::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('skill.validate'),__('skill.messages'));
         $bool=false;
         $data=array();
         for($i=0;$i<count($request->skill_cat);$i++){
@@ -185,12 +193,15 @@ class CVController extends Controller
         return ['error-dialog',__('skill.error_dialog')];
     }
     public function language($request){
-
-        $validatedData = $request->validate(__('language.validate'),__('language.messages'));
         $id=Auth::user()->id;
+        if(count($request->language_title)<2){
+            Language::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('language.validate'),__('language.messages'));
         $bool=false;
         $data=array();
-        for($i=0;$i<count($request->language_title);$i++){
+        for($i=1;$i<count($request->language_title);$i++){
             if($request->language_title[$i]!=''&&
             $request->language_Score[$i]>5){
                 $bool=true;
@@ -210,11 +221,16 @@ class CVController extends Controller
 
     public function media($request){
 
-        $validatedData = $request->validate(__('media.validate'),__('media.messages'));
         $id=Auth::user()->id;
+
+        if(count($request->media_company)<2){
+            Media::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('media.validate'),__('media.messages'));
         $bool=false;
         $data=array();
-        for($i=0;$i<count($request->media_company);$i++){
+        for($i=1;$i<count($request->media_company);$i++){
             if($request->media_company[$i]!=''&&
             $request->media_value[$i]!=''){
                 $bool=true;
@@ -232,9 +248,12 @@ class CVController extends Controller
         return ['error-dialog',__('media.error_dialog')];
     }
     public function experience($request){
-
-        $validatedData = $request->validate(__('experience.validate'),__('experience.messages'));
         $id=Auth::user()->id;
+        if(count($request->exp_title)<2){
+            Experience::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('experience.validate'),__('experience.messages'));
         $bool=false;
         $data=array();
         for($i=0;$i<count($request->exp_title);$i++){
@@ -261,9 +280,12 @@ class CVController extends Controller
         return ['error-dialog',__('experience.error_dialog')];
     }
     public function project($request){
-
-        $validatedData = $request->validate(__('project.validate'),__('project.messages'));
         $id=Auth::user()->id;
+        if(count($request->project_title)<2){
+            Project::where('user_id','=',$id)->delete();
+            return ['success-dialog',__('media.success_dialog')];
+        }
+        $validatedData = $request->validate(__('project.validate'),__('project.messages'));
         $bool=false;
         $data=array();
         for($i=0;$i<count($request->project_title);$i++){
