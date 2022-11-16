@@ -31,6 +31,7 @@
                     </label>
                 </div>
             </div>
+            <br><br><br>
 
 
             @foreach (__('setting.allpage') as $key=>$page)

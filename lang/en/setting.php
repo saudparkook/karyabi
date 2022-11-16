@@ -25,6 +25,7 @@ return[
         "deleteCV"=> "حذف بخشی از رزومه",
         "useraccess"=> "دیدن لیست مجوز ها",
         "adduseraccess"=>"اضافه کردن سطح دسترسی",
+        "edituseraccess"=>"ویرایش کردن سطح دسترسی",
     ],
 
     'allpage'=>[
@@ -51,7 +52,10 @@ return[
     'specialUser'=>[
         'setting_employe'=>'کارجو',
         'setting_employer'=>'کارفرما',
-    ]
+    ],
+    'settinguserAccess'=>[
+        'setting_'=>'value',
+    ],
 
 
 

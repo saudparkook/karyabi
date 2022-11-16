@@ -12,7 +12,10 @@ class Middelware extends Model
     protected $fillable = [
         'user_access',
         'pagename',
-        'status',
+
+    ];
+    protected $attributes=[
+        'status'=>'',
     ];
 
     public function getusers()

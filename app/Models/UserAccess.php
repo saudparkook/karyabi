@@ -13,10 +13,19 @@ class UserAccess extends Model
         'homepage',
         'status'
     ];
+    public $timestamps = false;
+
     protected $attributes=[
 
     ];
-    public function getusers()
+
+
+
+    public function setting()
+    {
+        return $this->hasMany(setting::class,'user_access','id')->select('user_access','title','value');
+    }
+    public function middelware()
     {
         return $this->hasMany(Middelware::class,'user_access','id');
     }

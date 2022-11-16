@@ -14,39 +14,42 @@
                 لیست خالی است
             </h2>
         @else
-        <table style="text-align: center;" class="table table-striped">
-            <thead class="thead-dark">
-                <tr style="text-align: center;">
+        <div class="col-sm-8 mx-auto my-auto">
+            <table style="text-align: center;" class="table table-striped">
+                <thead class="thead-dark">
+                    <tr style="text-align: center;">
 
-                    @foreach (__('admin/userAccessPage.userAccessPage.table') as $key=>$item)
-                    <th style="text-align: center;" scope="col">{{ $item}}</th>
+                        @foreach (__('admin/userAccessPage.userAccessPage.table') as $key=>$item)
+                        <th style="text-align: center;" scope="col">{{ $item}}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $x=1;
+                    @endphp
+                    @foreach ($get as $useraccess)
+                    <tr>
+                        <td class=" mx-auto my-auto">{{$x}}</td>
+                        <td class=" mx-auto my-auto">{{$useraccess->title}}</td>
+                        <td class=" mx-auto my-auto">{{__('setting.allpage')[$useraccess->homepage]}}</td>
+                        <td class=" mx-auto my-auto">
+                            <button class="btn btn-info">
+                                <a style="color: white;" href="{{route('edituseraccess',$useraccess->id)}}">{{ __('admin/userAccessPage.userAccessPage.textEditButton') }}</a>
+                            </button>
+                        </td>
+
+
+                    @php
+                        $x++;
+                    @endphp
+                    </tr>
                     @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $x=1;
-                @endphp
-                @foreach ($get as $useraccess)
-                <tr>
-                    <td>{{$x}}</td>
-                    <td>{{$useraccess->title}}</td>
-                    <td>{{__('setting.allpage')[$useraccess->homepage]}}</td>
-                    <td>
-                        <button class="btn btn-info">
-                            <a style="color: white;" href="{{route('edituseraccess',$useraccess->id)}}">{{ __('admin/userAccessPage.userAccessPage.textEditButton') }}</a>
-                        </button>
-                    </td>
 
+                </tbody>
+            </table>
+        </div>
 
-                @php
-                    $x++;
-                @endphp
-                </tr>
-                @endforeach
-
-            </tbody>
-        </table>
         @endif
 
     </div>

@@ -17,17 +17,17 @@
 
 
         <!--begin::Global تم Styles(used by all pages)-->
-                    <link href="assets/plugins/global/plugins.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css"/>
-                    <link href="assets/css/style.bundle.rtl.css?v=7.0.6" rel="stylesheet" type="text/css"/>
+                    <link href="{{url('assets/plugins/global/plugins.bundle.rtl.css?v=7.0.6')}}" rel="stylesheet" type="text/css"/>
+                    <link href="{{url('assets/css/style.bundle.rtl.css?v=7.0.6')}}" rel="stylesheet" type="text/css"/>
                 <!--end::Global تم Styles-->
 
         <!--begin::چیدمان رزومه(used by all pages)-->
 
 
-<link href="assets/css/themes/layout/aside/dark.rtl.css?v=7.0.6" rel="stylesheet" type="text/css"/>
+<link href="{{url('assets/css/themes/layout/aside/dark.rtl.css?v=7.0.6')}}" rel="stylesheet" type="text/css"/>
 <!--end::چیدمان رزومه-->
 
-        <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
+        <link rel="shortcut icon" href="{{ url('assets/media/logos/favicon.ico')}}"/>
 
         <script src="{{ url('js/sweetalert.js') }}"></script>
         <style>
@@ -376,7 +376,7 @@
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="symbol symbol-20 mr-3">
-                <img src="assets/media/svg/flags/226-united-states.svg" alt=""/>
+                <img src="{{ url('assets/media/svg/flags/226-united-states.svg')}}" alt=""/>
             </span>
             <span class="navi-text">انگلیسی</span>
         </a>
@@ -387,7 +387,7 @@
     <li class="navi-item active">
         <a href="#" class="navi-link">
             <span class="symbol symbol-20 mr-3">
-                <img src="assets/media/svg/flags/128-spain.svg" alt=""/>
+                <img src="{{ url('assets/media/svg/flags/128-spain.svg')}}" alt=""/>
             </span>
             <span class="navi-text">اسپانیایی</span>
         </a>
@@ -398,7 +398,7 @@
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="symbol symbol-20 mr-3">
-                <img src="assets/media/svg/flags/162-germany.svg" alt=""/>
+                <img src="{{ url('assets/media/svg/flags/162-germany.svg')}}" alt=""/>
             </span>
             <span class="navi-text">آلمانی</span>
         </a>
@@ -409,7 +409,7 @@
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="symbol symbol-20 mr-3">
-                <img src="assets/media/svg/flags/063-japan.svg" alt=""/>
+                <img src="{{ url('assets/media/svg/flags/063-japan.svg')}}" alt=""/>
             </span>
             <span class="navi-text">ژاپنی</span>
         </a>
@@ -420,7 +420,7 @@
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="symbol symbol-20 mr-3">
-                <img src="assets/media/svg/flags/195-france.svg" alt=""/>
+                <img src="{{ url('assets/media/svg/flags/195-france.svg')}}" alt=""/>
             </span>
             <span class="navi-text">فرانسه</span>
         </a>
@@ -567,8 +567,8 @@
         <!--end::Global Config-->
 
     	<!--begin::Global تم Bundle(used by all pages)-->
-    	    	   <script src="assets/plugins/global/plugins.bundle.js?v=7.0.6"></script>
-		    	   <script src="assets/js/scripts.bundle.js?v=7.0.6"></script>
+    	    	   <script src="{{ url('assets/plugins/global/plugins.bundle.js?v=7.0.6')}}"></script>
+		    	   <script src="{{ url('assets/js/scripts.bundle.js?v=7.0.6')}}"></script>
 				<!--end::Global تم Bundle-->
 
 
