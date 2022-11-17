@@ -75,4 +75,15 @@ class User extends Authenticatable
         return $this->hasMany(Project::class,'user_id','id');
     }
 
+
+    public function userAccess()
+    {
+        return $this->belongsTo(UserAccess::class,'access','id');
+    }
+
+    public function image(){
+        return $this->belongsTo(Userimage::class,'id','id');
+    }
+
+
 }

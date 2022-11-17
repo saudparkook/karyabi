@@ -26,6 +26,8 @@ return[
         "useraccess"=> "دیدن لیست مجوز ها",
         "adduseraccess"=>"اضافه کردن سطح دسترسی",
         "edituseraccess"=>"ویرایش کردن سطح دسترسی",
+        "users"=>"لیست کاربران",
+
     ],
 
     'allpage'=>[
